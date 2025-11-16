@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Data → Resultado</title>
+</head>
+<body>
+    <h2>Digite o dia e mês:</h2>
+
+    <input id="dia" type="number" placeholder="Dia" min="1" max="31">
+    <input id="mes" type="number" placeholder="Mês" min="1" max="12">
+
+    <button onclick="verResultado()">Ver resultado</button>
+
+    <p id="resultado"></p>
+
+    <script>
+        function verResultado() {
+            const dia = document.getElementById("dia").value;
+            const mes = document.getElementById("mes").value;
+
+            if (!dia || !mes) {
+                document.getElementById("resultado").innerText =
+                    "Por favor, preencha o dia e o mês.";
+                return;
+            }
+
+            // Aqui você define o que cada data vai mostrar
+            const tabela = {
+                "1-1": "Mensagem especial para 1 de janeiro!",
+                "25-12": "Feliz Natal!",
+                "7-9": "Independência do Brasil!",
+            };
+
+            const chave = `${dia}-${mes}`;
+
+            document.getElementById("resultado").innerText =
+                tabela[chave] || "Nenhuma informação registrada para essa data.";
+        }
+    </script>
+</body>
+</html>
