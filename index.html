@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html>
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <title>Data → Resultado</title>
+    <title>Data → Resultado Automático com Imagens</title>
 </head>
 <body>
     <h2>Digite o dia e mês:</h2>
@@ -13,8 +13,415 @@
     <button onclick="verResultado()">Ver resultado</button>
 
     <p id="resultado"></p>
+    <img id="imagem" src="" alt="" style="max-width:300px; display:block; margin-top:10px;">
 
     <script>
+        // Tabela com mensagens e imagens
+       
+            const tabela = {
+    // Janeiro
+    "1-1": { cabecalho: "Dia 1 de Janeiro — Solenidade de Maria Mãe de Deus, São Fulgêncio", descricao: "Dia dedicado a nossa Mãe Maria que disse sim a Deus e nós mostra a dizer o nosso sim também! É um dia de preceito!<br>São Fulgêncio foi um homem de grande cultura teológica e humanística, que ao amor do estudo unia a prática da ascese cristã. Pai e pastor do seu rebanho, devolvia aos pobres todo o dinheiro que entrava." },
+"2-1": { cabecalho: "Dia 2 de Janeiro — Basílio Magno e Gregório Nazianzo", descricao: "Eles estão juntos no calendário litúrgico porque tiveram as mesmas aspirações à santidade, os mesmos níveis culturais e alimentaram a mesma chama de vocação à vida monástica. Basílio dizia: “A quem fiz injustiça conservando o que é meu? Dizes tu? Diga-me, sinceramente, o que te pertence? De quem o recebeste? Se cada um se contentasse com o necessário e desse aos pobres o supérfluo, não haveria nem ricos nem pobres”" },
+"3-1": { cabecalho: "Dia 3 de Janeiro — Santa Genoveva", descricao: "Era filha de Sebero e Gerônica. Quando ela nasceu, o cristianismo já tinha chegado à França. Genoveva nasceu numa família cristã e recebeu educação esmerada na fé cristã, na qual manteve firmemente durante toda sua vida<br>Desde os sete anos de idade, Estefânia começou a ter visões de santos dominicanos, algo que a deixou tão perturbada que decidiu fazer votos de pobreza, castidade e obediência. Ela tinha uma devoção particular por São Tomás de Aquino.<br>Outros santos no mesmo dia: Beata Estefânia Quinzani e São José Maria Tomasi" },
+"4-1": { cabecalho: "Dia 4 de Janeiro — Santa Ângela de Foligno", descricao: "A história de Santa Ângela, considerada uma das primeiras místicas italianas, poderia ser o roteiro de um romance ou novela, com final feliz, é claro. Transformou-se de mulher fútil e despreocupada em mística e devota, depois literata, teóloga e, finalmente, santa. Num curto espaço de tempo perdeu os pais, o marido e todos os numerosos filhos, um a um. Mas, ao invés de esmorecer, uma mulher forte e confiante nasceu daquela sequência de mortes e sofrimento, cheia de fé em Deus e no seu conforto espiritual." },
+"5-1": { cabecalho: "Dia 5 de Janeiro — São João Nepomuceno Neumann", descricao: "Ao saber da premente necessidade de missionários para evangelizar a América, o jovem seminarista resolveu partir para os Estados Unidos. Era ali que a Providência o chamava para desenvolver seu frutífero ministério." },
+"6-1": { cabecalho: "Dia 6 de Janeiro — Santa Rafaela Maria do Sagrado Coração de Jesus", descricao: "A educação recebida de sua mãe, uma mistura de solícita ternura e de suave exigência, fez amadurecer nela os melhores traços do seu temperamento. Ao chegar à adolescência, era uma criança precocemente reflexiva, doce e tenaz ao mesmo tempo, senhora de si, sempre disposta a ceder nos seus gostos perante os gostos dos outros." },
+"7-1": { cabecalho: "Dia 7 de Janeiro — Beata Lindalva Justo de Oliveira", descricao: ". A Irmã cuidava dos idosos com muito amor, dedicação e alegria, sempre cantando e rezando o Terço com eles. Suas ações de caridade não se restringiam apenas ao abrigo, ela também participou do Movimento Voluntárias da Caridade, do núcleo da Paróquia Nossa Senhora da Boa Viagem, onde visitava idosos e doentes nas periferias." },
+"8-1": { cabecalho: "Dia 8 de Janeiro — São Severino", descricao: "Era um homem de fino trato, que falava o latim com perfeição, profundamente humilde, pobre e caridoso. Também possuía os dons do conselho, da profecia e da cura, os quais garantiu e manteve até o final de sua vida graças às longas penitências e preces que fazia ao Santíssimo Espírito Santo e ao cumprimento estrito dos votos feitos ao seguir a vocação sacerdotal. Especialmente venerado na Áustria e Alemanha, hoje, a urna mortuária de Santo Severino se encontra na igreja dos beneditinos em Nápoles, na Itália." },
+"9-1": { cabecalho: "Dia 9 de Janeiro — Santo André Corsini", descricao: "André foi um menino rebelde e muito levado, pouco se importava pela igreja, seu maior interesse era em jogos e caças, porém, sua mãe tinha feito uma promessa à Virgem Maria de oferecer seu primeiro filho em suas mãos, pois no dia de seu nascimento a mãe sonhou que dava a luz a um lobo e que ao entrar na igreja ele teria virado um cordeiro. Após estar ciente disso, sua vida de devoção e conversão começou." },
+"10-1": { cabecalho: "Dia 10 de Janeiro — Beato Gonçalo de Amarante", descricao: "Ainda jovem, Gonçalo deu indicações de que seria um santo. Concentrou-se nos estudos da Igreja e recebeu treinamento na casa do arcebispo de Braga." },
+"11-1": { cabecalho: "Dia 11 de Janeiro — Santo Higino, o nono Papa", descricao: "Santo Higino se esmerou assim na preservação da integridade do ensinamento evangélico. Tomou como exemplo o poderoso imperador Adriano, mexeu nas estruturas hierárquicas, instituiu as Ordens menores para melhorar o serviço da Igreja e a preparação ao sacerdócio. Parece que se deve a ele a instituição de padrinhos no batismo." },
+"12-1": { cabecalho: "Dia 12 de Janeiro — São Bernardo de Corleone", descricao: "O jovem Filipe (nome antigo do Santo), alto forte e de caráter violento, amante das lutas e armas, se desenvolveu. Certo dia, ele foi provocado por um rapaz e num momento de ira, bruscamente com a espada arrancou o braço do agressor. Nesse momento, nasceu um novo homem que arrependido pediu perdão ao rapaz, ambos viraram melhores amigos apesar do ocorrido." },
+"13-1": { cabecalho: "Dia 13 de Janeiro — Santo Hilário de Poitiers", descricao: "Casado com uma mulher de raro mérito, que compartilhava com ele todos seus anseios e esperanças, tiveram uma filha, Abra. Seguindo os exemplos domésticos, esta cresceu na piedade e virtude. Após alguns anos, em comum acordo, separou-se então da mulher e filha para servir só a Deus, foi ordenado sacerdote e sagrado Bispo." },
+"14-1": { cabecalho: "Dia 14 de Janeiro — Santa Elisabete Ana Bayley Seton", descricao: "Apesar da vida difícil, ela fundou uma nova instituição religiosa feminina totalmente norte americana, a Ordem das Irmãs de Caridade de São José, para a qual doou todos os seus bens. A instituição, com a finalidade de proporcionar educação cristã e cura de doentes, progrediu rapidamente. Ela foi a primeira cidadã Norte Americana a ser beatificada" },
+"15-1": { cabecalho: "Dia 15 de Janeiro — Santo Amaro", descricao: "Santo Amaro foi um dos primeiros discípulos de São Bento, e tudo o que sabemos dele está contido em dois trechos da vida de São Bento, escrita por São Gregório Magno. O primeiro trecho faz alusão à oferta, por parte do pai de Amaro, o senador Equício, que o oferece ainda menino a São Bento. E o segundo conta um milagre que o fez andar pelas águas." },
+"16-1": { cabecalho: "Dia 16 de Janeiro — Santo Honorato", descricao: "Santo Honorato era de uma família de cônsules romanos fixada na Gália. Na juventude renunciou o culto dos ídolos, e conquistou para Cristo seu irmão mais velho, Venâncio. Convencidos da vacuidade das coisas deste mundo, ambos desejaram renunciar a ele e a todos os seus prazeres, mas um pai amoroso e pagão insistia em impor-lhes obstáculos nesta caminhada. Enfim, levando consigo como diretor espiritual, São Caprásio, um santo eremita, velejaram de Marsélia até a Grécia, com a intenção de viver em segredo em algum deserto. Em seguida, Venâncio faleceu ditosamente em Metona, e Honorato, também enfermo, viu-se obrigado a retornar com seu condutor." },
+"17-1": { cabecalho: "Dia 17 de Janeiro — Santo Antão, Abade", descricao: "Antão é uma forma arcaica de dizer Antônio, ele sentia um vazio apesar de ter condições boas de vida, no qual só o preencheu e encontrou a verdadeira felicidade ao se abdicar de seus bens e sua vida, em prol de uma vida de oração. Ele foi um exemplo vivido de seguir o evangelho" },
+"18-1": { cabecalho: "Dia 18 de Janeiro — Santa Margarida da Hungria", descricao: "Margarida era uma princesa, filha do rei Bela IV, da Hungria e da rainha Maria, de origem bizantina. Ela nasceu no castelo de Turoc, logo foi batizada, pois os reis eram fervorosos cristãos. Ela realmente era especial, foi um exemplo de humildade e virtude para as outras religiosas. Rezava sempre, e fazia penitencias, se oferecendo como vítima proposital, para a salvação do seu povo. Possuía um ilimitado desapego às coisas materiais, amando plenamente a pobreza." },
+"19-1": { cabecalho: "Dia 19 de Janeiro — São Canuto", descricao: "São Canuto desde a mocidade habituou-se aos penosos trabalhos da guerra, e realizou grandes e ousados feitos numa idade em que os outros mal conseguem ser espectadores. Ele construiu igrejas, hospitais e escolas, e era conhecido por proteger os pobres, viúvas e órfãos. Origor com a cobrança do dízimo eclesiástico, junto com o estilo de governo religioso, causou descontentamento entre a nobreza. Nesse dia também se lembra São Germânico" },
+"20-1": { cabecalho: "Dia 20 de Janeiro — São Sebastião", descricao: "São Sebastião foi um soldado da guarda de elite do imperador que após sua conversão quis levar as pessoas a Cristo a ponto de arriscar a sua própria vida. Sebastião se converteu ao cristianismo, porém essa conversão se deu em segredo, já que a religião cristã estava sendo perseguida pelo Império. Desse jeito, todos os fossem cristãos ou se converterem a fé cristã, devem ficar em segredo, “longe dos olhos” do Império. Nesse dia também nós recordamos de São Fabião" },
+"21-1": { cabecalho: "Dia 21 de Janeiro — Santa Inês", descricao: "A padroeira da castidade, dos jardineiros, moças, noivos, vítimas de violação e virgens. A tradição fala de um amor não correspondido do filho do Prefeito de Roma por Inês que, com apenas treze anos, não quis aceitar a proposta do nobre. Na verdade, a jovem havia feito o voto de castidade por Cristo. Quando o Prefeito foi informado sobre a sua consagração, desencadeou sua vingança: Inês devia entrar no círculo das vestais, que ofereciam culto à deusa protetora de Roma, porém a jovem nunca pereceu." },
+"22-1": { cabecalho: "Dia 22 de Janeiro — São Vicente Pallotti e Beata Laura Vicuña", descricao: "Sacerdote da Terceira Ordem (1795-1850). Fundou a Congregação dos Padres Palotinos e das Irmãs Palotinas Com sua mãe aprendeu a amar os irmãos mais pobres, crescendo generoso e bondoso. Enquanto nos estudos mostrava grande esforço e dedicação, nas orações mostrava devoção extremada ao Espírito Santo. Ordenado presbítero em 1818, doutorou-se em Filosofia e Teologia na Universidade Romana La Sapienza. Excelente confessor e conselheiro, foi procurado, inclusive pelo Papa.<br>Também lembramos da vida da Beata Laura Vicuña, que apesar de morrer jovem, deu a vida pela conversão de sua mãe" },
+"23-1": { cabecalho: "Dia 23 de Janeiro — Santa Emerenciana e São Idelfonso", descricao: "Uma irmã adotiva de Santa Inês, a virgem Emerenciana, ainda catecúmena, derramou lágrimas sobre o túmulo de sua amiga que acabara de ser martirizada. Alguns pagãos zombaram de sua dor. Ela, cheia da virtude divina da qual Jesus é a fonte, censurou os idólatras por sua crueldade para com Inês, e eles em sua fúria a apedrejaram naquele mesmo túmulo. Batizada em seu próprio sangue, ela foi se juntar para sempre a seu esposo e sua irmã." },
+"24-1": { cabecalho: "Dia 24 de Janeiro — São Francisco de Sales", descricao: "Aos seis anos foi encaminhado para os estudos, pois seu pai tinha planos de torná-lo um grande senhor, nos moldes de então, para enriquecer a família.  Aos 18 anos, teve uma crise espiritual, a famosa crise da predestinação. Achava-se condenado ao fogo do inferno. Lutou muito, por várias semanas, até que, diante de uma imagem de Nossa Senhora, rezando a oração de São Bernardo, sentiu-se curado." },
+"25-1": { cabecalho: "Dia 25 de Janeiro — Conversão de São Paulo e Santo Ananias", descricao: "Na conversão de Paulo, percebemos que perseguir a Igreja é perseguir o próprio Cristo, por isso, rogamos a conversão e mudança daqueles que hoje procuram fazer o mal para os cristãos. São Paulo antes de sua conversão, era um perseguidor de cristãos, e se tornou um dos discipulos de Cristo." },
+"26-1": { cabecalho: "Dia 26 de Janeiro — São Timóteo e São Tito", descricao: "Timóteo, um santo muito antigo, venerado há muitos e muitos séculos, morreu no ano de 97. Timóteo era o “braço direito” do apóstolo Paulo, seu grande amigo e companheiro, sendo considerado, ao lado do mestre, como o primeiro e corajoso pregador do cristianismo. Quase sempre evangelizaram juntos, mas por várias vezes, Paulo o mandou como representante, em quase todos os lugares importantes daquela época, enquanto ele próprio abria novos caminhos.<br>Tito foi o segundo grande colaborador de Paulo. Provinha do paganismo. Foi convertido e batizado por Paulo." },
+"27-1": { cabecalho: "Dia 27 de Janeiro — Santa Ângela Meríci", descricao: "Santa Ângela Mérici nasceu em 21 de março de 1474, em Desenzano del Garda, Itália. De uma família muito honesta — materialmente pobre, mas espiritualmente riquíssima —, amava muito Cristo e sua Igreja. Com o testemunho dos pais, Ângela e a irmã foram crescendo. Desde pequenina, Ângela já tinha uma vida de oração e penitência, onde buscava amar a Deus cada vez mais. Tinha o costume de reunir-se com o pai para ouvir sobre a vida dos santos e começou a nutrir uma devoção a Santa Úrsula." },
+"28-1": { cabecalho: "Dia 28 de Janeiro — Santo Tomás de Aquino", descricao: "Santo Tomás de Aquino foi o maior expoente do movimento filosófico da Escolástica, muito estudado nas escolas e na filosofia. Quando jovem, o garoto já tinha propensão a vida religiosa. O plano de seu pai era fazer do filho um monge rico, opulento, chefe do mosteiro de Montecassino. Contudo, Tomás não tinha nada disso em mente. Ao contar sua vontade para a família, gerou-se um alvoroço em sua cidade. Tomás, profundo amante de Cristo, havia decidido se entregar totalmente pelo reino dos céus. Escolheu viver a pobreza total na Ordem dos Pregadores, os dominicanos, uma ordem mendicante pautada nos estudos filosóficos." },
+"29-1": { cabecalho: "Dia 29 de Janeiro — São Sulpício Severo", descricao: "Totalmente absorvido pela vida mundana, em uma época em que todas as esperanças favoreciam a imaginação, Sulpício casou-se com a filha de um Cônsul, que também era muito rica e com muitos conhecimentos sociais. Com o falecimento da sua esposa, caiu em profunda depressão. Todavia, ao invés de se deixar abater pelo desespero, recobrou suas energias, buscando consolação em uma vida de piedade. Deus recompensou a sua fé, de modo magnífico, com milhares de outras graças. Assim, decidiu consagrar-se a Deus e despojar-se dos seus inumeráveis bens." },
+"30-1": { cabecalho: "Dia 30 de Janeiro — Santa Jacinta Mariscotti", descricao: "Após uma vida frívola e mundana, Jacinta de Mariscotti converteu-se radicalmente, transformando-se numa grande santa dotada dos dons de milagre e de profecia. De seus pais muito virtuosos, recebeu profunda formação religiosa, correspondendo aos anseios dos progenitores. Entretanto, atingindo a adolescência, Clarice tornou-se vaidosa e mundana, buscando apenas divertir-se. Após buscar muito a felicidade no mundo mundano e não encontra-la, ela percebeu que a igreja era a resposta que tanto procurava, e o perdão." },
+"31-1": { cabecalho: "Dia 31 de Janeiro — São João Bosco", descricao: "São João Bosco teve várias revelações em sonhos ao longo de sua vida. Com sua fé, fundou oratórios, centros juvenis, escolas, dedicou-se à boa imprensa e às missões. Surgiram também as primeiras casas nos arredores de Turim às quais continuam a chegar novas vocações. Ao longo de toda a sua vida Dom Bosco foi corajoso, otimista, capaz de contagiar e de envolver muitos na sua obra educativa e pastoral." },
+
+
+    // Fevereiro
+    "1-2": { cabecalho: "Dia 1 de Fevereiro — Beata Ludovica Albertoni", descricao: "A Beata Ludovica Albertoni foi uma nobre romana viúva, dedicada à caridade e ao serviço dos pobres, que se tornou membro da Ordem Terceira de São Francisco após a morte do marido" },
+"2-2": { cabecalho: "Dia 2 de Fevereiro — Santa Domenica Mantovani", descricao: "Maria Domingas Mantovani foi uma religiosa italiana católica romana professa e co-fundadora das Irmãzinhas da Sagrada Família; ela os estabeleceu ao lado de Giuseppe Nascimbeni. Como freira recebeu o nome religioso de Maria da Imaculada. Ela foi beatificada em 27 de abril de 2003 e canonizada em 15 de maio de 2022.<br>Também nos recordamos da Apresentação do Senhor, a Nossa Senhora da Luz e Nossa Senhora dos Navegantes" },
+"3-2": { cabecalho: "Dia 3 de Fevereiro — São Brás", descricao: "São Brás, médico no século III, entrou em crise porque não se sentia totalmente realizado. Sua insatisfação não estava relacionada à sua profissão, pois ele era bom médico e prestava um ótimo serviço à sociedade, mas vivia uma crise existencial. São Brás buscou a Deus e viveu uma experiência com Ele. Muitas pessoas começaram a ser evangelizadas por meio da busca de santidade daquele médico. Também nesse dia são lembrados São Lourenço de Cantuária e Santo Anscário" },
+"4-2": { cabecalho: "Dia 4 de Fevereiro — São João de Brito", descricao: "São João de Brito foi um jesuíta português nascido em Lisboa em 1647, conhecido como "O São Francisco Xavier Português". Ele foi um missionário na Índia, onde evangelizou e converteu milhares de pessoas. Foi preso várias vezes por soldados pagãos, mas foi libertado após um príncipe local se interessar por sua pregação. Retornou à Índia e foi preso novamente, sendo condenado à morte." },
+"5-2": { cabecalho: "Dia 5 de Fevereiro — Santa Águeda", descricao: "Protetora dos seios e intercessora das virgens, desde a infância, desejou consagrar-se a Deus. Tudo iniciou-se com o édito governador Quinciano, a fim de perseguir os cristãos, isso desencadeou a fuga da santa para Catânia. Ali, ela foi presa e obrigada a relações sexuais com ele. Por negá-lo, permanecendo virgem e consagrada, foi submetida aos maus tratos, presa e torturada. Teve seus mamilos arrancados e, por fim, submetida às brasas acesas. Ao ser retirada do fogo, foi posta de volta à prisão, mas já estando desfalecida, morreu. Mesmo em meio a tanta tortura, permaneceu fiel a Deus, demonstrando grande fortaleza." },
+"6-2": { cabecalho: "Dia 6 de Fevereiro — Santa Doroteia", descricao: "Santa Doroteia foi uma jovem cristã da Capadócia, martirizada no ano 304 durante as perseguições de Diocleciano. É conhecida como a "santa das flores" devido a um milagre que envolveu rosas e maçãs, que inspirou a conversão de Teófilo, e hoje é padroeira dos floristas e jardineiros. Foi levada à força para que duas sacerdotisas pagãs (Crista e Calista) a fizessem desistir da fé. Em vez disso, as duas se converteram e foram martirizadas, levando Santa Doroteia a ser sentenciada à morte por decapitação. Também é dia de São Paulo Miki e seus Companheiros" },
+"7-2": { cabecalho: "Dia 7 de Fevereiro — São Ricardo ", descricao: "São Ricardo foi um nobre inglês do século VIII conhecido por ser o pai de três santos (Vilibaldo, Vunibaldo e Valburga) e padroeiro da família. Ele renunciou às suas regalias para viver uma vida religiosa. Durante uma peregrinação a Roma, ele faleceu em Luca, onde foi sepultado na igreja de São Frediano. " },
+"8-2": { cabecalho: "Dia 8 de Fevereiro — Santa Josefina Bakhita", descricao: "Santa Bakhita é padroeira dos escravos e intercessora dos sequestrados, ela foi escravizada e sofreu muito por uma parte de sua vida, mas graças a Deus, conseguiu conhecer a igreja católica e insistiu na fé, e após conseguir sua liberdade, durante 45 anos, foi cozinheira, sacristã e, acima de tudo, uma porteira do convento de Schio, onde agia com bondade.<br>Também é dia de São Jerônimo Emiliano" },
+"9-2": { cabecalho: "Dia 9 de Fevereiro — Santa Apolônia", descricao: "Santa Apolônia foi uma mártir cristã , conhecida por ter sido torturada durante a perseguição aos cristãos em Alexandria, Egito, no século III. Ela se tornou padroeira dos dentistas e da saúde bucal devido aos seus dentes terem sido arrancados como parte de seu martírio, e é popularmente invocada contra a dor de dente. Também lembramos da Beata Anna Catharina Emmerick" },
+"10-2": { cabecalho: "Dia 10 de Fevereiro — Santa Escolástica", descricao: "vazio" },
+"11-2": { cabecalho: "Dia 11 de Fevereiro — Nossa Senhora de Lourdes", descricao: "vazio" },
+"12-2": { cabecalho: "Dia 12 de Fevereiro — Santa Eulália de Barcelona", descricao: "vazio" },
+"13-2": { cabecalho: "Dia 13 de Fevereiro — São Martiniano", descricao: "vazio" },
+"14-2": { cabecalho: "Dia 14 de Fevereiro — São Valentim; Santos Cirilo e Metódio", descricao: "vazio" },
+"15-2": { cabecalho: "Dia 15 de Fevereiro — Santo Onésimo", descricao: "vazio" },
+"16-2": { cabecalho: "Dia 16 de Fevereiro — Santa Juliana", descricao: "vazio" },
+"17-2": { cabecalho: "Dia 17 de Fevereiro — Santo Aleixo; Sete Fundadores dos Servitas; Santa Engrácia de Braga", descricao: "vazio" },
+"18-2": { cabecalho: "Dia 18 de Fevereiro — São Teotónio; Beato João de Fiesole (Fra Angélico)", descricao: "vazio" },
+"19-2": { cabecalho: "Dia 19 de Fevereiro — São Conrado Confalonieri", descricao: "vazio" },
+"20-2": { cabecalho: "Dia 20 de Fevereiro — São Francisco e Santa Jacinta Marto", descricao: "vazio" },
+"21-2": { cabecalho: "Dia 21 de Fevereiro — São Pedro Damião", descricao: "vazio" },
+"22-2": { cabecalho: "Dia 22 de Fevereiro — Cátedra de São Pedro; Santa Margarida de Cortona", descricao: "vazio" },
+"23-2": { cabecalho: "Dia 23 de Fevereiro — São Policarpo; Santa Josefina Vannini", descricao: "vazio" },
+"24-2": { cabecalho: "Dia 24 de Fevereiro — São Sérgio", descricao: "vazio" },
+"25-2": { cabecalho: "Dia 25 de Fevereiro — São Luís Versiglia e Callisto Caravario", descricao: "vazio" },
+"26-2": { cabecalho: "Dia 26 de Fevereiro — Santo Alexandre do Egito", descricao: "vazio" },
+"27-2": { cabecalho: "Dia 27 de Fevereiro — São Gabriel de Nossa Senhora das Dores", descricao: "vazio" },
+"28-2": { cabecalho: "Dia 28 de Fevereiro — São Romão", descricao: "vazio" },
+
+
+    // Março
+    "1-3": { cabecalho: "Dia 1 de Março — São David; São Rosendo", descricao: "vazio" },
+"2-3": { cabecalho: "Dia 2 de Março — Santa Inês da Boêmia (ou de Praga)", descricao: "vazio" },
+"3-3": { cabecalho: "Dia 3 de Março — Santos Marino e Astério", descricao: "vazio" },
+"4-3": { cabecalho: "Dia 4 de Março — São Casimiro", descricao: "vazio" },
+"5-3": { cabecalho: "Dia 5 de Março — São João José da Cruz", descricao: "vazio" },
+"6-3": { cabecalho: "Dia 6 de Março — Santa Rosa de Viterbo", descricao: "vazio" },
+"7-3": { cabecalho: "Dia 7 de Março — Santas Perpétua e Felicidade; Santa Teresa Margarida Redi", descricao: "vazio" },
+"8-3": { cabecalho: "Dia 8 de Março — São João de Deus", descricao: "vazio" },
+"9-3": { cabecalho: "Dia 9 de Março — Santa Francisca Romana", descricao: "vazio" },
+"10-3": { cabecalho: "Dia 10 de Março — Santos Mártires de Sebaste", descricao: "vazio" },
+"11-3": { cabecalho: "Dia 11 de Março — São Eulógio", descricao: "vazio" },
+"12-3": { cabecalho: "Dia 12 de Março — Santo Inocêncio", descricao: "vazio" },
+"13-3": { cabecalho: "Dia 13 de Março — Santos Rodrigo e Salomão", descricao: "vazio" },
+"14-3": { cabecalho: "Dia 14 de Março — Santa Matilde", descricao: "vazio" },
+"15-3": { cabecalho: "Dia 15 de Março — São Longuinho; São Clemente Maria Hofbauer", descricao: "vazio" },
+"16-3": { cabecalho: "Dia 16 de Março — Santa Eusébia", descricao: "vazio" },
+"17-3": { cabecalho: "Dia 17 de Março — São Patrício", descricao: "vazio" },
+"18-3": { cabecalho: "Dia 18 de Março — São Cirilo de Jerusalém", descricao: "vazio" },
+"19-3": { cabecalho: "Dia 19 de Março — São José, esposo da Virgem Maria", descricao: "vazio" },
+"20-3": { cabecalho: "Dia 20 de Março — Santa Maria Josefina do Coração de Jesus", descricao: "vazio" },
+"21-3": { cabecalho: "Dia 21 de Março — São Nicolau de Flue", descricao: "vazio" },
+"22-3": { cabecalho: "Dia 22 de Março — São Zacarias, Papa; Santa Léia", descricao: "vazio" },
+"23-3": { cabecalho: "Dia 23 de Março — São Toríbio de Mongrovejo", descricao: "vazio" },
+"24-3": { cabecalho: "Dia 24 de Março — Santa Catarina da Suécia; Santo Oscar Romero", descricao: "vazio" },
+"25-3": { cabecalho: "Dia 25 de Março — Anunciação do Senhor; São Dimas", descricao: "vazio" },
+"26-3": { cabecalho: "Dia 26 de Março — São Bráulio", descricao: "vazio" },
+"27-3": { cabecalho: "Dia 27 de Março — São Ruperto", descricao: "vazio" },
+"28-3": { cabecalho: "Dia 28 de Março — São Guntrano; Santa Gisela da Baviera", descricao: "vazio" },
+"29-3": { cabecalho: "Dia 29 de Março — São Constantino", descricao: "vazio" },
+"30-3": { cabecalho: "Dia 30 de Março — São João Clímaco", descricao: "vazio" },
+"31-3": { cabecalho: "Dia 31 de Março — Santa Balbina; São Benjamin", descricao: "vazio" },
+
+
+    // Abril
+    "1-4": { cabecalho: "Dia 1 de Abril — São Hugo de Grenoble", descricao: "vazio" },
+"2-4": { cabecalho: "Dia 2 de Abril — São Francisco de Paula", descricao: "vazio" },
+"3-4": { cabecalho: "Dia 3 de Abril — São Ricardo", descricao: "vazio" },
+"4-4": { cabecalho: "Dia 4 de Abril — Santo Isidoro, bispo e doutor da Igreja", descricao: "vazio" },
+"5-4": { cabecalho: "Dia 5 de Abril — São Vicente Ferrer", descricao: "vazio" },
+"6-4": { cabecalho: "Dia 6 de Abril — São Marcelino", descricao: "vazio" },
+"7-4": { cabecalho: "Dia 7 de Abril — São João Batista de La Salle", descricao: "vazio" },
+"8-4": { cabecalho: "Dia 8 de Abril — Santo Alberto", descricao: "vazio" },
+"9-4": { cabecalho: "Dia 9 de Abril — São Leopoldo Mandic; Santa Maria de Cléofas", descricao: "vazio" },
+"10-4": { cabecalho: "Dia 10 de Abril — Santa Madalena de Canossa", descricao: "vazio" },
+"11-4": { cabecalho: "Dia 11 de Abril — Santo Estanislau; Santa Gemma Galgani", descricao: "vazio" },
+"12-4": { cabecalho: "Dia 12 de Abril — São José Moscati; São Vítor", descricao: "vazio" },
+"13-4": { cabecalho: "Dia 13 de Abril — São Martinho I, Papa e mártir", descricao: "vazio" },
+"14-4": { cabecalho: "Dia 14 de Abril — Santa Ludovina", descricao: "vazio" },
+"15-4": { cabecalho: "Dia 15 de Abril — São Crescente", descricao: "vazio" },
+"16-4": { cabecalho: "Dia 16 de Abril — Santa Maria Bernadete Soubirous", descricao: "vazio" },
+"17-4": { cabecalho: "Dia 17 de Abril — Santa Catarina Tekakwitha; Santo Aniceto", descricao: "vazio" },
+"18-4": { cabecalho: "Dia 18 de Abril — São Galdino; Santo Apolônio; Beata Maria da Encarnação", descricao: "vazio" },
+"19-4": { cabecalho: "Dia 19 de Abril — Santo Expedito; Santa Ema", descricao: "vazio" },
+"20-4": { cabecalho: "Dia 20 de Abril — Santa Inês de Montepulciano", descricao: "vazio" },
+"21-4": { cabecalho: "Dia 21 de Abril — Santo Anselmo", descricao: "vazio" },
+"22-4": { cabecalho: "Dia 22 de Abril — São Caio, Papa; Santa Senhorinha", descricao: "vazio" },
+"23-4": { cabecalho: "Dia 23 de Abril — São Jorge", descricao: "vazio" },
+"24-4": { cabecalho: "Dia 24 de Abril — São Fidélis de Sigmaringa", descricao: "vazio" },
+"25-4": { cabecalho: "Dia 25 de Abril — São Marcos, evangelista", descricao: "vazio" },
+"26-4": { cabecalho: "Dia 26 de Abril — São Pascásio; Santo Anacleto", descricao: "vazio" },
+"27-4": { cabecalho: "Dia 27 de Abril — Santa Zita", descricao: "vazio" },
+"28-4": { cabecalho: "Dia 28 de Abril — Santa Gianna Beretta Molla; São Luís Maria Grignion de Montfort", descricao: "vazio" },
+"29-4": { cabecalho: "Dia 29 de Abril — Santa Catarina de Sena", descricao: "vazio" },
+"30-4": { cabecalho: "Dia 30 de Abril — São Pio V, Papa", descricao: "vazio" },
+
+
+    // Maio
+    "1-5": { cabecalho: "Dia 1 de Maio — São José Operário", descricao: "vazio" },
+"2-5": { cabecalho: "Dia 2 de Maio — Santo Atanásio, bispo e doutor da Igreja", descricao: "vazio" },
+"3-5": { cabecalho: "Dia 3 de Maio — São Filipe e São Tiago, Apóstolos", descricao: "vazio" },
+"4-5": { cabecalho: "Dia 4 de Maio — São Peregrino", descricao: "vazio" },
+"5-5": { cabecalho: "Dia 5 de Maio — Santo Ângelo", descricao: "vazio" },
+"6-5": { cabecalho: "Dia 6 de Maio — São Domingos Sávio", descricao: "vazio" },
+"7-5": { cabecalho: "Dia 7 de Maio — Santa Flávia Domitila", descricao: "vazio" },
+"8-5": { cabecalho: "Dia 8 de Maio — São Pedro de Tarantásia", descricao: "vazio" },
+"9-5": { cabecalho: "Dia 9 de Maio — São Pacômio; Santa Luíza de Marillac", descricao: "vazio" },
+"10-5": { cabecalho: "Dia 10 de Maio — Santo Antonino; São João de Ávila", descricao: "vazio" },
+"11-5": { cabecalho: "Dia 11 de Maio — Santo Inácio de Láconi", descricao: "vazio" },
+"12-5": { cabecalho: "Dia 12 de Maio — Santos Nereu, Aquiles e Pancrácio; Beata Imelda Lambertini", descricao: "vazio" },
+"13-5": { cabecalho: "Dia 13 de Maio — Nossa Senhora de Fátima", descricao: "vazio" },
+"14-5": { cabecalho: "Dia 14 de Maio — São Matias, Apóstolo", descricao: "vazio" },
+"15-5": { cabecalho: "Dia 15 de Maio — Santa Dionísia; Santo Isidoro Lavrador", descricao: "vazio" },
+"16-5": { cabecalho: "Dia 16 de Maio — São Simão Stock", descricao: "vazio" },
+"17-5": { cabecalho: "Dia 17 de Maio — São Pascoal Bailão", descricao: "vazio" },
+"18-5": { cabecalho: "Dia 18 de Maio — São João I; São Leonardo Murialdo", descricao: "vazio" },
+"19-5": { cabecalho: "Dia 19 de Maio — Santa Maria Bernarda; Santo Ivo", descricao: "vazio" },
+"20-5": { cabecalho: "Dia 20 de Maio — São Bernardino de Sena", descricao: "vazio" },
+"21-5": { cabecalho: "Dia 21 de Maio — São Cristóvão de Magalhães e companheiros mártires", descricao: "vazio" },
+"22-5": { cabecalho: "Dia 22 de Maio — Santa Rita de Cássia", descricao: "vazio" },
+"23-5": { cabecalho: "Dia 23 de Maio — São João Batista de Rossi", descricao: "vazio" },
+"24-5": { cabecalho: "Dia 24 de Maio — Nossa Senhora Auxiliadora; São Vicente de Lérins", descricao: "vazio" },
+"25-5": { cabecalho: "Dia 25 de Maio — São Beda Venerável; Santa Maria Madalena de Pazzi", descricao: "vazio" },
+"26-5": { cabecalho: "Dia 26 de Maio — São Filipe de Neri", descricao: "vazio" },
+"27-5": { cabecalho: "Dia 27 de Maio — Santo Agostinho de Cantuária", descricao: "vazio" },
+"28-5": { cabecalho: "Dia 28 de Maio — São Germano de Paris", descricao: "vazio" },
+"29-5": { cabecalho: "Dia 29 de Maio — Santa Úrsula; São Maximino de Tréveris; São Paulo VI", descricao: "vazio" },
+"30-5": { cabecalho: "Dia 30 de Maio — Santa Joana d’Arc", descricao: "vazio" },
+"31-5": { cabecalho: "Dia 31 de Maio — Visitação de Nossa Senhora", descricao: "vazio" },
+
+
+    // Junho
+    "1-6": { cabecalho: "Dia 1 de Junho — Santa Justiniana", descricao: "vazio" },
+"2-6": { cabecalho: "Dia 2 de Junho — Santos Marcelino e Pedro", descricao: "vazio" },
+"3-6": { cabecalho: "Dia 3 de Junho — Santo Carlos Lwanga e companheiros mártires", descricao: "vazio" },
+"4-6": { cabecalho: "Dia 4 de Junho — São Francisco Caracciolo", descricao: "vazio" },
+"5-6": { cabecalho: "Dia 5 de Junho — São Bonifácio", descricao: "vazio" },
+"6-6": { cabecalho: "Dia 6 de Junho — Santa Norberta, São Marcelino Champagnat", descricao: "vazio" },
+"7-6": { cabecalho: "Dia 7 de Junho — São Roberto Belarmino", descricao: "vazio" },
+"8-6": { cabecalho: "Dia 8 de Junho — Santo Antônio de Sant’Anna Galvão", descricao: "vazio" },
+"9-6": { cabecalho: "Dia 9 de Junho — Santa Efrém", descricao: "vazio" },
+"10-6": { cabecalho: "Dia 10 de Junho — São Margarida d’Youville", descricao: "vazio" },
+"11-6": { cabecalho: "Dia 11 de Junho — São Barnabé, Apóstolo", descricao: "vazio" },
+"12-6": { cabecalho: "Dia 12 de Junho — Beato Onofre de Scopello", descricao: "vazio" },
+"13-6": { cabecalho: "Dia 13 de Junho — Santo Antônio de Pádua", descricao: "vazio" },
+"14-6": { cabecalho: "Dia 14 de Junho — São Basílio Magno; Santo Eusébio", descricao: "vazio" },
+"15-6": { cabecalho: "Dia 15 de Junho — Santa Gertrudes", descricao: "vazio" },
+"16-6": { cabecalho: "Dia 16 de Junho — São João Francisco Régis", descricao: "vazio" },
+"17-6": { cabecalho: "Dia 17 de Junho — São Gregório Barbarigo", descricao: "vazio" },
+"18-6": { cabecalho: "Dia 18 de Junho — São Eleutério; São Leôncio", descricao: "vazio" },
+"19-6": { cabecalho: "Dia 19 de Junho — São Romualdo", descricao: "vazio" },
+"20-6": { cabecalho: "Dia 20 de Junho — São Silverio; São Francisco Solano", descricao: "vazio" },
+"21-6": { cabecalho: "Dia 21 de Junho — São Luis Gonzaga", descricao: "vazio" },
+"22-6": { cabecalho: "Dia 22 de Junho — São Tomás More; São João Fisher", descricao: "vazio" },
+"23-6": { cabecalho: "Dia 23 de Junho — Natividade de São João Batista", descricao: "vazio" },
+"24-6": { cabecalho: "Dia 24 de Junho — São João Batista", descricao: "vazio" },
+"25-6": { cabecalho: "Dia 25 de Junho — São Guilherme", descricao: "vazio" },
+"26-6": { cabecalho: "Dia 26 de Junho — São Josemaría Escrivá", descricao: "vazio" },
+"27-6": { cabecalho: "Dia 27 de Junho — São Cirilo de Alexandria", descricao: "vazio" },
+"28-6": { cabecalho: "Dia 28 de Junho — São Irineu", descricao: "vazio" },
+"29-6": { cabecalho: "Dia 29 de Junho — São Pedro e São Paulo, Apóstolos", descricao: "vazio" },
+"30-6": { cabecalho: "Dia 30 de Junho — Primeiros mártires da Igreja de Roma", descricao: "vazio" },
+
+
+    // Julho
+    "1-7": { cabecalho: "Dia 1 de Julho — São Junípero Serra", descricao: "vazio" },
+"2-7": { cabecalho: "Dia 2 de Julho — Visitação de Nossa Senhora", descricao: "vazio" },
+"3-7": { cabecalho: "Dia 3 de Julho — Santo Tomé", descricao: "vazio" },
+"4-7": { cabecalho: "Dia 4 de Julho — São Isabel Rainha", descricao: "vazio" },
+"5-7": { cabecalho: "Dia 5 de Julho — São Antônio Maria Zaccaria", descricao: "vazio" },
+"6-7": { cabecalho: "Dia 6 de Julho — São Maria Goretti", descricao: "vazio" },
+"7-7": { cabecalho: "Dia 7 de Julho — Santo Inácio de Loyola", descricao: "vazio" },
+"8-7": { cabecalho: "Dia 8 de Julho — São Sisto II e companheiros", descricao: "vazio" },
+"9-7": { cabecalho: "Dia 9 de Julho — São Agostinho Zhao Rong e companheiros", descricao: "vazio" },
+"10-7": { cabecalho: "Dia 10 de Julho — Santo Ambrósio de Optina", descricao: "vazio" },
+"11-7": { cabecalho: "Dia 11 de Julho — São Benedito", descricao: "vazio" },
+"12-7": { cabecalho: "Dia 12 de Julho — São João Gualberto", descricao: "vazio" },
+"13-7": { cabecalho: "Dia 13 de Julho — São Henrique", descricao: "vazio" },
+"14-7": { cabecalho: "Dia 14 de Julho — São Camilo de Lellis", descricao: "vazio" },
+"15-7": { cabecalho: "Dia 15 de Julho — Santa Buenaventura", descricao: "vazio" },
+"16-7": { cabecalho: "Dia 16 de Julho — Nossa Senhora do Carmo", descricao: "vazio" },
+"17-7": { cabecalho: "Dia 17 de Julho — São Alexius Falconieri", descricao: "vazio" },
+"18-7": { cabecalho: "Dia 18 de Julho — São Frederico", descricao: "vazio" },
+"19-7": { cabecalho: "Dia 19 de Julho — Santa Maria Micaela", descricao: "vazio" },
+"20-7": { cabecalho: "Dia 20 de Julho — Santo Elias, Profeta", descricao: "vazio" },
+"21-7": { cabecalho: "Dia 21 de Julho — São Lorenzo de Brindisi", descricao: "vazio" },
+"22-7": { cabecalho: "Dia 22 de Julho — São Maria Madalena", descricao: "vazio" },
+"23-7": { cabecalho: "Dia 23 de Julho — Santa Brígida", descricao: "vazio" },
+"24-7": { cabecalho: "Dia 24 de Julho — São Charbel Makhlouf", descricao: "vazio" },
+"25-7": { cabecalho: "Dia 25 de Julho — São Tiago, Apóstolo", descricao: "vazio" },
+"26-7": { cabecalho: "Dia 26 de Julho — São Joaquim e Sant’Ana", descricao: "vazio" },
+"27-7": { cabecalho: "Dia 27 de Julho — Santa Maria", descricao: "vazio" },
+"28-7": { cabecalho: "Dia 28 de Julho — Santo Inácio de Loyola", descricao: "vazio" },
+"29-7": { cabecalho: "Dia 29 de Julho — Santa Marta", descricao: "vazio" },
+"30-7": { cabecalho: "Dia 30 de Julho — São Pedro Crisólogo", descricao: "vazio" },
+"31-7": { cabecalho: "Dia 31 de Julho — Santo Inácio de Loyola", descricao: "vazio" },
+
+
+    // Agosto
+    "1-8": { cabecalho: "Dia 1 de Agosto — Santa Lídia", descricao: "vazio" },
+"2-8": { cabecalho: "Dia 2 de Agosto — Santo Eusebio de Vercelli", descricao: "vazio" },
+"3-8": { cabecalho: "Dia 3 de Agosto — São Lopo", descricao: "vazio" },
+"4-8": { cabecalho: "Dia 4 de Agosto — São João Maria Vianney", descricao: "vazio" },
+"5-8": { cabecalho: "Dia 5 de Agosto — Dedicação da Basílica de Santa Maria Maior", descricao: "vazio" },
+"6-8": { cabecalho: "Dia 6 de Agosto — Transfiguração do Senhor", descricao: "vazio" },
+"7-8": { cabecalho: "Dia 7 de Agosto — São Sixto II e companheiros", descricao: "vazio" },
+"8-8": { cabecalho: "Dia 8 de Agosto — Santo Domingo", descricao: "vazio" },
+"9-8": { cabecalho: "Dia 9 de Agosto — Santa Teresa Benedita da Cruz (Edith Stein)", descricao: "vazio" },
+"10-8": { cabecalho: "Dia 10 de Agosto — São Lourenço", descricao: "vazio" },
+"11-8": { cabecalho: "Dia 11 de Agosto — São Clara de Assis", descricao: "vazio" },
+"12-8": { cabecalho: "Dia 12 de Agosto — São João Maria Vianney", descricao: "vazio" },
+"13-8": { cabecalho: "Dia 13 de Agosto — São Ponciano e São Hipólito", descricao: "vazio" },
+"14-8": { cabecalho: "Dia 14 de Agosto — Santa Eusebia", descricao: "vazio" },
+"15-8": { cabecalho: "Dia 15 de Agosto — Assunção de Nossa Senhora", descricao: "vazio" },
+"16-8": { cabecalho: "Dia 16 de Agosto — Santa Estefânia", descricao: "vazio" },
+"17-8": { cabecalho: "Dia 17 de Agosto — Santo Hipólito", descricao: "vazio" },
+"18-8": { cabecalho: "Dia 18 de Agosto — São Helena", descricao: "vazio" },
+"19-8": { cabecalho: "Dia 19 de Agosto — São João Eudes", descricao: "vazio" },
+"20-8": { cabecalho: "Dia 20 de Agosto — São Bernardo de Claraval", descricao: "vazio" },
+"21-8": { cabecalho: "Dia 21 de Agosto — São Pio X", descricao: "vazio" },
+"22-8": { cabecalho: "Dia 22 de Agosto — Imaculada Corredeira", descricao: "vazio" },
+"23-8": { cabecalho: "Dia 23 de Agosto — Santa Rosa de Lima", descricao: "vazio" },
+"24-8": { cabecalho: "Dia 24 de Agosto — São Bartolomeu, Apóstolo", descricao: "vazio" },
+"25-8": { cabecalho: "Dia 25 de Agosto — São Luís", descricao: "vazio" },
+"26-8": { cabecalho: "Dia 26 de Agosto — São Joaquim e Sant’Ana", descricao: "vazio" },
+"27-8": { cabecalho: "Dia 27 de Agosto — São Monico", descricao: "vazio" },
+"28-8": { cabecalho: "Dia 28 de Agosto — Santo Agostinho", descricao: "vazio" },
+"29-8": { cabecalho: "Dia 29 de Agosto — Martirizado de São João Batista", descricao: "vazio" },
+"30-8": { cabecalho: "Dia 30 de Agosto — Santa Rosa de Lima", descricao: "vazio" },
+"31-8": { cabecalho: "Dia 31 de Agosto — Santo Raimundo", descricao: "vazio" },
+
+
+    // Setembro
+    "1-9": { cabecalho: "Dia 1 de Setembro — Santíssimo Nome de Maria", descricao: "vazio" },
+"2-9": { cabecalho: "Dia 2 de Setembro — Primeiro sábado do mês", descricao: "vazio" },
+"3-9": { cabecalho: "Dia 3 de Setembro — Santa Gregória Taumaturga", descricao: "vazio" },
+"4-9": { cabecalho: "Dia 4 de Setembro — São Rosário de Lima", descricao: "vazio" },
+"5-9": { cabecalho: "Dia 5 de Setembro — Primeira Quinta-feira", descricao: "vazio" },
+"6-9": { cabecalho: "Dia 6 de Setembro — Primeiro Sábado", descricao: "vazio" },
+"7-9": { cabecalho: "Dia 7 de Setembro — Independência do Brasil", descricao: "vazio" },
+"8-9": { cabecalho: "Dia 8 de Setembro — Natividade de Nossa Senhora", descricao: "vazio" },
+"9-9": { cabecalho: "Dia 9 de Setembro — São Pedro Claver", descricao: "vazio" },
+"10-9": { cabecalho: "Dia 10 de Setembro — São Nicolau de Tolentino", descricao: "vazio" },
+"11-9": { cabecalho: "Dia 11 de Setembro — São Constantino", descricao: "vazio" },
+"12-9": { cabecalho: "Dia 12 de Setembro — São João Crisóstomo", descricao: "vazio" },
+"13-9": { cabecalho: "Dia 13 de Setembro — São João Crisóstomo", descricao: "vazio" },
+"14-9": { cabecalho: "Dia 14 de Setembro — Exaltação da Santa Cruz", descricao: "vazio" },
+"15-9": { cabecalho: "Dia 15 de Setembro — Nossa Senhora das Dores", descricao: "vazio" },
+"16-9": { cabecalho: "Dia 16 de Setembro — São Cornélio e São Cipriano", descricao: "vazio" },
+"17-9": { cabecalho: "Dia 17 de Setembro — São Roberto Belarmino", descricao: "vazio" },
+"18-9": { cabecalho: "Dia 18 de Setembro — São José de Cupertino", descricao: "vazio" },
+"19-9": { cabecalho: "Dia 19 de Setembro — São Januário", descricao: "vazio" },
+"20-9": { cabecalho: "Dia 20 de Setembro — São André Kim e companheiros", descricao: "vazio" },
+"21-9": { cabecalho: "Dia 21 de Setembro — São Mateus, Apóstolo e Evangelista", descricao: "vazio" },
+"22-9": { cabecalho: "Dia 22 de Setembro — Primeiro domingo após a festa de São Mateus", descricao: "vazio" },
+"23-9": { cabecalho: "Dia 23 de Setembro — São Pio de Pietrelcina", descricao: "vazio" },
+"24-9": { cabecalho: "Dia 24 de Setembro — Nossa Senhora de Walsingham", descricao: "vazio" },
+"25-9": { cabecalho: "Dia 25 de Setembro — Santos Cosme e Damião", descricao: "vazio" },
+"26-9": { cabecalho: "Dia 26 de Setembro — São José de Cupertino", descricao: "vazio" },
+"27-9": { cabecalho: "Dia 27 de Setembro — São Vicente de Paulo", descricao: "vazio" },
+"28-9": { cabecalho: "Dia 28 de Setembro — São Wenceslau e São Lourenço Ruiz", descricao: "vazio" },
+"29-9": { cabecalho: "Dia 29 de Setembro — Arcanjos Miguel, Gabriel e Rafael", descricao: "vazio" },
+"30-9": { cabecalho: "Dia 30 de Setembro — São Jerônimo", descricao: "vazio" },
+
+
+    // Outubro
+    "1-10": { cabecalho: "Dia 1 de Outubro — Santa Teresinha do Menino Jesus", descricao: "vazio" },
+"2-10": { cabecalho: "Dia 2 de Outubro — Anjo da Guarda", descricao: "vazio" },
+"3-10": { cabecalho: "Dia 3 de Outubro — São Tomás Apóstolo", descricao: "vazio" },
+"4-10": { cabecalho: "Dia 4 de Outubro — São Francisco de Assis", descricao: "vazio" },
+"5-10": { cabecalho: "Dia 5 de Outubro — Santa Faustina Kowalska", descricao: "vazio" },
+"6-10": { cabecalho: "Dia 6 de Outubro — São Bruno", descricao: "vazio" },
+"7-10": { cabecalho: "Dia 7 de Outubro — Nossa Senhora do Rosário", descricao: "vazio" },
+"8-10": { cabecalho: "Dia 8 de Outubro — São Pelágio", descricao: "vazio" },
+"9-10": { cabecalho: "Dia 9 de Outubro — São Dionísio", descricao: "vazio" },
+"10-10": { cabecalho: "Dia 10 de Outubro — São Daniel Comboni", descricao: "vazio" },
+"11-10": { cabecalho: "Dia 11 de Outubro — São João XXIII", descricao: "vazio" },
+"12-10": { cabecalho: "Dia 12 de Outubro — Nossa Senhora Aparecida", descricao: "vazio" },
+"13-10": { cabecalho: "Dia 13 de Outubro — Primeira Sexta-feira", descricao: "vazio" },
+"14-10": { cabecalho: "Dia 14 de Outubro — São Calixto I", descricao: "vazio" },
+"15-10": { cabecalho: "Dia 15 de Outubro — Santa Teresa de Ávila", descricao: "vazio" },
+"16-10": { cabecalho: "Dia 16 de Outubro — São Margarida Maria Alacoque", descricao: "vazio" },
+"17-10": { cabecalho: "Dia 17 de Outubro — Santo Inácio de Antioquia", descricao: "vazio" },
+"18-10": { cabecalho: "Dia 18 de Outubro — São Lucas Evangelista", descricao: "vazio" },
+"19-10": { cabecalho: "Dia 19 de Outubro — São Paulo de São Pedro", descricao: "vazio" },
+"20-10": { cabecalho: "Dia 20 de Outubro — São João de Capistrano", descricao: "vazio" },
+"21-10": { cabecalho: "Dia 21 de Outubro — São Hilarion", descricao: "vazio" },
+"22-10": { cabecalho: "Dia 22 de Outubro — São João Paulo II", descricao: "vazio" },
+"23-10": { cabecalho: "Dia 23 de Outubro — São João de Brébeuf e São Isaac Jogues", descricao: "vazio" },
+"24-10": { cabecalho: "Dia 24 de Outubro — São Rafael Arcanjo", descricao: "vazio" },
+"25-10": { cabecalho: "Dia 25 de Outubro — São Crispim e São Crispiniano", descricao: "vazio" },
+"26-10": { cabecalho: "Dia 26 de Outubro — São Evaristo", descricao: "vazio" },
+"27-10": { cabecalho: "Dia 27 de Outubro — São Frumêncio", descricao: "vazio" },
+"28-10": { cabecalho: "Dia 28 de Outubro — São Simão e São Judas Tadeu", descricao: "vazio" },
+"29-10": { cabecalho: "Dia 29 de Outubro — São Narciso", descricao: "vazio" },
+"30-10": { cabecalho: "Dia 30 de Outubro — São Marcellino", descricao: "vazio" },
+"31-10": { cabecalho: "Dia 31 de Outubro — Santo Afonso Rodrigues", descricao: "vazio" },
+
+
+    // Novembro
+    "1-11": { cabecalho: "Dia 1 de Novembro — Dia de Todos os Santos", descricao: "Dia dedicado a todas as santas almas que estão em comunhão com Cristo! Lembre-se que a santidade é um chamado feito a todos, inclusive à você!" },
+"2-11": { cabecalho: "Dia 2 de Novembro — Finados / Dia de Finados", descricao: "vazio" },
+"3-11": { cabecalho: "Dia 3 de Novembro — São Martinho de Tours", descricao: "vazio" },
+"4-11": { cabecalho: "Dia 4 de Novembro — São Carlos Borromeu", descricao: "vazio" },
+"5-11": { cabecalho: "Dia 5 de Novembro — São Félix de Valois", descricao: "vazio" },
+"6-11": { cabecalho: "Dia 6 de Novembro — Todos os Santos do Brasil", descricao: "vazio" },
+"7-11": { cabecalho: "Dia 7 de Novembro — São Willibrord", descricao: "vazio" },
+"8-11": { cabecalho: "Dia 8 de Novembro — São Bento", descricao: "vazio" },
+"9-11": { cabecalho: "Dia 9 de Novembro — Dedicação de Basílica", descricao: "vazio" },
+"10-11": { cabecalho: "Dia 10 de Novembro — São Leão Magno", descricao: "vazio" },
+"11-11": { cabecalho: "Dia 11 de Novembro — São Martinho de Tours", descricao: "vazio" },
+"12-11": { cabecalho: "Dia 12 de Novembro — São Josafá", descricao: "vazio" },
+"13-11": { cabecalho: "Dia 13 de Novembro — Santa Luísa de Marillac", descricao: "vazio" },
+"14-11": { cabecalho: "Dia 14 de Novembro — São João de Capistrano", descricao: "vazio" },
+"15-11": { cabecalho: "Dia 15 de Novembro — Proclamação da República", descricao: "vazio" },
+"16-11": { cabecalho: "Dia 16 de Novembro — Santa Margarida Maria Alacoque", descricao: "vazio" },
+"17-11": { cabecalho: "Dia 17 de Novembro — Santa Isabel da Hungria", descricao: "Ela foi uma princesa que, após se casar com o duque Luís da Turíngia, dedicou-se intensamente à fé cristã e à caridade com os pobres. Viúva jovem e mãe de três filhos, foi expulsa do castelo pelos parentes do marido devido à sua generosidade, mas perseverou em sua missão. Tornou-se religiosa franciscana, fundou um hospital e morreu jovem, aos 24 anos, servindo aos doentes. " },
+"18-11": { cabecalho: "Dia 18 de Novembro — Dedicação das Basílicas de São Pedro e São Paulo, Apóstolos.", descricao: "A primeira basílica de São Pedro foi construída sobre o túmulo do próprio São Pedro no local onde ele foi executado. A atual, consagrada pelo Papa Urbano VIII em 18 de novembro de 1626, foi construída com contribuições de artistas como Bramante, Michelangelo e Bernini.<br>Já a Basílica de São Paulo, construída sobre o túmulo de São Paulo, foi quase totalmente destruída por um incêndio em 1823. Foi reconstruída e consagrada pelo Papa Pio IX em 10 de dezembro de 1854, e a celebração anual foi fixada para 18 de novembro.<br>A festa une a celebração das basílicas como um símbolo da unidade da Igreja, com as duas basílicas sendo consideradas o tesouro histórico mais precioso da Igreja Latina." },
+"19-11": { cabecalho: "Dia 19 de Novembro — São Roque González e companheiros mártires", descricao: "São Roque González de Santa Cruz nasceu em Assunção, Paraguai, em 1576. Filho de pais espanhóis, de elevada posição e de autêntico cristianismo, em sua infância e adolescência sobressai entre seus companheiros por sua vida de honestidade, recolhimento e pureza, por seu espírito e prática de oração ou piedade, bem como pela frequente recepção dos sacramentos e amigo da Eucaristia. Exercia, além disso, entre seus colegas, verdadeira liderança, e todos lhe queriam bem. Notável era a sua coragem, e seu caráter era forte e coerente em tudo que dizia respeito a Deus e à religião. Suas ocupações foram pestes, fomes, doenças, catequese, educação rural e agrícola. Superava a tudo e a todos com a sua caridade e o seu fervor. Muitos missionários jovens foram mandados fazer estágio com ele." },
+"20-11": { cabecalho: "Dia 20 de Novembro — São Félix de Valois e São Edmundo", descricao: "São Félix de Valois foi um príncipe francês que renunciou ao seu título e fortuna para se tornar um monge eremita e fundou a Ordem da Santíssima Trindade com São João da Mata para a redenção de cativos cristãos. Desde jovem, mostrou uma alma caridosa, preocupando-se com os pobres e doando suas posses. Atendeu ao chamado para o sacerdócio, estudou e foi ordenado padre, renunciando a todos os seus títulos de nobreza.<br>Santo Edmundo, um rei inglês martirizado por sua fé no século IX. Ele é lembrado como um rei cristão que, aos 14 anos, se tornou o último rei da Anglia Oriental e foi martirizado pelos dinamarqueses após se recusar a renunciar ao cristianismo. Sua morte aconteceu no dia 20 de novembro de 870, transpassado por flechas, após ser capturado. Era filho do rei da Saxônia e foi criado na Inglaterra. Aos 14 anos, tornou-se rei do reino da Anglia Oriental, e morreu confirmando sua fé." },
+"21-11": { cabecalho: "Dia 21 de Novembro — Apresentação de Maria ao templo", descricao: "Apresentação é a festa estabelecida pela Santa Igreja para consagrar a memória de um solene acontecimento na vida de Maria Santíssima, sendo Ela ainda criança. Uma tradição constante, cuja origem remonta aos primeiros tempos do Cristianismo, nos informa que a Virgem Santíssima, aos três anos de idade, foi apresentada ao Templo de Jerusalém, onde se consagrou em corpo e alma ao Senhor. " },
+"22-11": { cabecalho: "Dia 22 de Novembro — Santa Cecília", descricao: "vazio" },
+"23-11": { cabecalho: "Dia 23 de Novembro — São Clemente I", descricao: "vazio" },
+"24-11": { cabecalho: "Dia 24 de Novembro — São João de Capistrano", descricao: "vazio" },
+"25-11": { cabecalho: "Dia 25 de Novembro — Santa Catarina de Alexandria", descricao: "vazio" },
+"26-11": { cabecalho: "Dia 26 de Novembro — Cristo Rei", descricao: "vazio" },
+"27-11": { cabecalho: "Dia 27 de Novembro — Nossa Senhora das Graças", descricao: "vazio" },
+"28-11": { cabecalho: "Dia 28 de Novembro — São Leonardo de Porto Maurício", descricao: "vazio" },
+"29-11": { cabecalho: "Dia 29 de Novembro — Advento", descricao: "vazio" },
+"30-11": { cabecalho: "Dia 30 de Novembro — São André Apóstolo", descricao: "vazio" },
+
+
+    // Dezembro
+    "1-12": { cabecalho: "Dia 1 de Dezembro — Santa Bárbara", descricao: "vazio" },
+"2-12": { cabecalho: "Dia 2 de Dezembro — São Francisco Xavier", descricao: "vazio" },
+"3-12": { cabecalho: "Dia 3 de Dezembro — São Francisco Xavier", descricao: "vazio" },
+"4-12": { cabecalho: "Dia 4 de Dezembro — São João Damasceno", descricao: "vazio" },
+"5-12": { cabecalho: "Dia 5 de Dezembro — São Sabas", descricao: "vazio" },
+"6-12": { cabecalho: "Dia 6 de Dezembro — São Nicolau", descricao: "vazio" },
+"7-12": { cabecalho: "Dia 7 de Dezembro — São Ambrósio de Milão", descricao: "vazio" },
+"8-12": { cabecalho: "Dia 8 de Dezembro — Imaculada Conceição", descricao: "vazio" },
+"9-12": { cabecalho: "Dia 9 de Dezembro — Santa Leocádia", descricao: "vazio" },
+"10-12": { cabecalho: "Dia 10 de Dezembro — Nossa Senhora da Conceição", descricao: "vazio" },
+"11-12": { cabecalho: "Dia 11 de Dezembro — Santa Dâmaris", descricao: "vazio" },
+"12-12": { cabecalho: "Dia 12 de Dezembro — Nossa Senhora de Guadalupe", descricao: "vazio" },
+"13-12": { cabecalho: "Dia 13 de Dezembro — Santa Luzia", descricao: "vazio" },
+"14-12": { cabecalho: "Dia 14 de Dezembro — São João de Brito", descricao: "vazio" },
+"15-12": { cabecalho: "Dia 15 de Dezembro — São Valeriano", descricao: "vazio" },
+"16-12": { cabecalho: "Dia 16 de Dezembro — São Adelaide", descricao: "vazio" },
+"17-12": { cabecalho: "Dia 17 de Dezembro — Santa Olímpia", descricao: "vazio" },
+"18-12": { cabecalho: "Dia 18 de Dezembro — São Flávio", descricao: "vazio" },
+"19-12": { cabecalho: "Dia 19 de Dezembro — São Duns Scotus", descricao: "vazio" },
+"20-12": { cabecalho: "Dia 20 de Dezembro — São Domingos de Silos", descricao: "vazio" },
+"21-12": { cabecalho: "Dia 21 de Dezembro — São Pedro Canísio", descricao: "vazio" },
+"22-12": { cabecalho: "Dia 22 de Dezembro — Santa Francisca Xavier Cabrini", descricao: "vazio" },
+"23-12": { cabecalho: "Dia 23 de Dezembro — São João de Kety", descricao: "vazio" },
+"24-12": { cabecalho: "Dia 24 de Dezembro — Véspera de Natal", descricao: "vazio" },
+"25-12": { cabecalho: "Dia 25 de Dezembro — Natal", descricao: "vazio" },
+"26-12": { cabecalho: "Dia 26 de Dezembro — Santo Estêvão", descricao: "vazio" },
+"27-12": { cabecalho: "Dia 27 de Dezembro — São João Apóstolo e Evangelista", descricao: "vazio" },
+"28-12": { cabecalho: "Dia 28 de Dezembro — Santos Inocentes", descricao: "vazio" },
+"29-12": { cabecalho: "Dia 29 de Dezembro — Santa Tomás Becket", descricao: "vazio" },
+"30-12": { cabecalho: "Dia 30 de Dezembro — Santo Egídio", descricao: "vazio" },
+"31-12": { cabecalho: "Dia 31 de Dezembro — São Silvestre", descricao: "vazio" }
+
+};
+
+
         function verResultado() {
             const dia = document.getElementById("dia").value;
             const mes = document.getElementById("mes").value;
@@ -22,21 +429,40 @@
             if (!dia || !mes) {
                 document.getElementById("resultado").innerText =
                     "Por favor, preencha o dia e o mês.";
+                document.getElementById("imagem").style.display = "none";
                 return;
             }
 
-            // Aqui você define o que cada data vai mostrar
-            const tabela = {
-                "1-1": "Mensagem especial para 1 de janeiro!",
-                "25-12": "Feliz Natal!",
-                "7-9": "Independência do Brasil!",
-            };
-
             const chave = `${dia}-${mes}`;
+            const info = tabela[chave];
 
-            document.getElementById("resultado").innerText =
-                tabela[chave] || "Nenhuma informação registrada para essa data.";
+            if (info) {
+                document.getElementById("resultado").innerHTML =
+            `<h3>${info.cabecalho}</h3><p>${info.descricao}</p>`;
+                document.getElementById("imagem").src = info.imagem;
+                document.getElementById("imagem").style.display = "block";
+            } else {
+                document.getElementById("resultado").innerText =
+                    "Nenhuma informação registrada para essa data.";
+                document.getElementById("imagem").style.display = "none";
+            }
         }
+
+        function atualizarDataAtual() {
+            const hoje = new Date();
+            const diaAtual = hoje.getDate();
+            const mesAtual = hoje.getMonth() + 1;
+
+            if (document.getElementById("dia").value != diaAtual) {
+                document.getElementById("dia").value = diaAtual;
+                document.getElementById("mes").value = mesAtual;
+                verResultado(); // já pega os valores dos inputs
+            }
+        }
+
+        window.onload = atualizarDataAtual;
+        setInterval(atualizarDataAtual, 300000); // atualiza a cada minuto
     </script>
 </body>
 </html>
+//verifique cada um na hora da descrição, alguns estão errados
