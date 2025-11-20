@@ -1,14 +1,31 @@
 {
-    "1-2": {
-        "cabecalho": "1 de fev",
-        "descricao": "Primeiro dia de fev! 🎉"
-    },
-    "25-2": {
-        "cabecalho": "25 de fev",
-        "descricao": "Feliz Natal! 🎄"
-    },
-    "2-2": {
-        "cabecalho": "2 de fev",
-        "descricao": "Dia das Bruxas! 🎃"
-    }
+    "1-2": { "cabecalho": "Dia 1 de Fevereiro — Beata Ludovica Albertoni", "descricao": "A Beata Ludovica Albertoni foi uma nobre romana viúva, dedicada à caridade e ao serviço dos pobres, que se tornou membro da Ordem Terceira de São Francisco após a morte do marido" },
+"2-2": { "cabecalho": "Dia 2 de Fevereiro — Santa Domenica Mantovani", "descricao": "Maria Domingas Mantovani foi uma religiosa italiana católica romana professa e co-fundadora das Irmãzinhas da Sagrada Família; ela os estabeleceu ao lado de Giuseppe Nascimbeni. Como freira recebeu o nome religioso de Maria da Imaculada. Ela foi beatificada em 27 de abril de 2003 e canonizada em 15 de maio de 2022.<br>Também nos recordamos da Apresentação do Senhor, a Nossa Senhora da Luz e Nossa Senhora dos Navegantes" },
+"3-2": { "cabecalho": "Dia 3 de Fevereiro — São Brás", "descricao": "São Brás, médico no século III, entrou em crise porque não se sentia totalmente realizado. Sua insatisfação não estava relacionada à sua profissão, pois ele era bom médico e prestava um ótimo serviço à sociedade, mas vivia uma crise existencial. São Brás buscou a Deus e viveu uma experiência com Ele. Muitas pessoas começaram a ser evangelizadas por meio da busca de santidade daquele médico. Também nesse dia são lembrados São Lourenço de Cantuária e Santo Anscário" },
+"4-2": { "cabecalho": "Dia 4 de Fevereiro — São João de Brito", "descricao": "São João de Brito foi um jesuíta português nascido em Lisboa em 1647, conhecido como \"O São Francisco Xavier Português\". Ele foi um missionário na Índia, onde evangelizou e converteu milhares de pessoas. Foi preso várias vezes por soldados pagãos, mas foi libertado após um príncipe local se interessar por sua pregação. Retornou à Índia e foi preso novamente, sendo condenado à morte." },
+"5-2": { "cabecalho": "Dia 5 de Fevereiro — Santa Águeda", "descricao": "Protetora dos seios e intercessora das virgens, desde a infância, desejou consagrar-se a Deus. Tudo iniciou-se com o édito governador Quinciano, a fim de perseguir os cristãos, isso desencadeou a fuga da santa para Catânia. Ali, ela foi presa e obrigada a relações sexuais com ele. Por negá-lo, permanecendo virgem e consagrada, foi submetida aos maus tratos, presa e torturada. Teve seus mamilos arrancados e, por fim, submetida às brasas acesas. Ao ser retirada do fogo, foi posta de volta à prisão, mas já estando desfalecida, morreu. Mesmo em meio a tanta tortura, permaneceu fiel a Deus, demonstrando grande fortaleza." },
+"6-2": { "cabecalho": "Dia 6 de Fevereiro — Santa Doroteia", "descricao": "Santa Doroteia foi uma jovem cristã da Capadócia, martirizada no ano 304 durante as perseguições de Diocleciano. É conhecida como a \"santa das flores\" devido a um milagre que envolveu rosas e maçãs, que inspirou a conversão de Teófilo, e hoje é padroeira dos floristas e jardineiros. Foi levada à força para que duas sacerdotisas pagãs (Crista e Calista) a fizessem desistir da fé. Em vez disso, as duas se converteram e foram martirizadas, levando Santa Doroteia a ser sentenciada à morte por decapitação. Também é dia de São Paulo Miki e seus Companheiros" },
+"7-2": { "cabecalho": "Dia 7 de Fevereiro — São Ricardo ", "descricao": "São Ricardo foi um nobre inglês do século VIII conhecido por ser o pai de três santos (Vilibaldo, Vunibaldo e Valburga) e padroeiro da família. Ele renunciou às suas regalias para viver uma vida religiosa. Durante uma peregrinação a Roma, ele faleceu em Luca, onde foi sepultado na igreja de São Frediano. " },
+"8-2": { "cabecalho": "Dia 8 de Fevereiro — Santa Josefina Bakhita", "descricao": "Santa Bakhita é padroeira dos escravos e intercessora dos sequestrados, ela foi escravizada e sofreu muito por uma parte de sua vida, mas graças a Deus, conseguiu conhecer a igreja católica e insistiu na fé, e após conseguir sua liberdade, durante 45 anos, foi cozinheira, sacristã e, acima de tudo, uma porteira do convento de Schio, onde agia com bondade.<br>Também é dia de São Jerônimo Emiliano" },
+"9-2": { "cabecalho": "Dia 9 de Fevereiro — Santa Apolônia", "descricao": "Santa Apolônia foi uma mártir cristã , conhecida por ter sido torturada durante a perseguição aos cristãos em Alexandria, Egito, no século III. Ela se tornou padroeira dos dentistas e da saúde bucal devido aos seus dentes terem sido arrancados como parte de seu martírio, e é popularmente invocada contra a dor de dente. Também lembramos da Beata Anna Catharina Emmerick" },
+"10-2": { "cabecalho": "Dia 10 de Fevereiro — Santa Escolástica", "descricao": "vazio" },
+"11-2": { "cabecalho": "Dia 11 de Fevereiro — Nossa Senhora de Lourdes", "descricao": "vazio" },
+"12-2": { "cabecalho": "Dia 12 de Fevereiro — Santa Eulália de Barcelona", "descricao": "vazio" },
+"13-2": { "cabecalho": "Dia 13 de Fevereiro — São Martiniano", "descricao": "vazio" },
+"14-2": { "cabecalho": "Dia 14 de Fevereiro — São Valentim; Santos Cirilo e Metódio", "descricao": "vazio" },
+"15-2": { "cabecalho": "Dia 15 de Fevereiro — Santo Onésimo", "descricao": "vazio" },
+"16-2": { "cabecalho": "Dia 16 de Fevereiro — Santa Juliana", "descricao": "vazio" },
+"17-2": { "cabecalho": "Dia 17 de Fevereiro — Santo Aleixo; Sete Fundadores dos Servitas; Santa Engrácia de Braga", "descricao": "vazio" },
+"18-2": { "cabecalho": "Dia 18 de Fevereiro — São Teotónio; Beato João de Fiesole (Fra Angélico)", "descricao": "vazio" },
+"19-2": { "cabecalho": "Dia 19 de Fevereiro — São Conrado Confalonieri", "descricao": "vazio" },
+"20-2": { "cabecalho": "Dia 20 de Fevereiro — São Francisco e Santa Jacinta Marto", "descricao": "vazio" },
+"21-2": { "cabecalho": "Dia 21 de Fevereiro — São Pedro Damião", "descricao": "vazio" },
+"22-2": { "cabecalho": "Dia 22 de Fevereiro — Cátedra de São Pedro; Santa Margarida de Cortona", "descricao": "vazio" },
+"23-2": { "cabecalho": "Dia 23 de Fevereiro — São Policarpo; Santa Josefina Vannini", "descricao": "vazio" },
+"24-2": { "cabecalho": "Dia 24 de Fevereiro — São Sérgio", "descricao": "vazio" },
+"25-2": { "cabecalho": "Dia 25 de Fevereiro — São Luís Versiglia e Callisto Caravario", "descricao": "vazio" },
+"26-2": { "cabecalho": "Dia 26 de Fevereiro — Santo Alexandre do Egito", "descricao": "vazio" },
+"27-2": { "cabecalho": "Dia 27 de Fevereiro — São Gabriel de Nossa Senhora das Dores", "descricao": "vazio" },
+"28-2": { "cabecalho": "Dia 28 de Fevereiro — São Romão", "descricao": "vazio" }
+
 }
