@@ -1,0 +1,14 @@
+{
+    "1-1": {
+        "cabecalho": "1 de Janeiro",
+        "descricao": "Primeiro dia do ano! 🎉"
+    },
+    "25-12": {
+        "cabecalho": "25 de Dezembro",
+        "descricao": "Feliz Natal! 🎄"
+    },
+    "31-10": {
+        "cabecalho": "31 de Outubro",
+        "descricao": "Dia das Bruxas! 🎃"
+    }
+}
